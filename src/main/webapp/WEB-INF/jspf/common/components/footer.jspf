@@ -1,0 +1,48 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<section class="py-0 pt-4 bg-secondary30">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+            <div class="mb-3">
+                <h5 class="lh-lg fw-bold text-white">THÔNG TIN CHUNG</h5>
+                <ul class="list-unstyled mb-md-4 mb-lg-0">
+                    <li class="lh-lg"><a class="text-200 text-decoration-none" href="https://github.com/tempo1406">Về chúng tôi</a></li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <h5 class="lh-lg fw-bold text-white">LIÊN HỆ</h5>
+                <ul class="list-unstyled mb-md-4 mb-lg-0">
+                    <li class="lh-lg text-200 text-decoration-none">
+                        <a href="tel:0017-001-1704" class="navbar-sm-brand text-light text-decoration-none">
+                            Số điện thoại: 0823-832-767
+                        </a>
+
+                    </li>
+                    <li class="lh-lg text-200 text-decoration-none">
+                        <!-- ZeroWidthSpace characters help break the email if the email is too long -->
+                        <a href="mailto:qnfood.shop@gmail.com" class="navbar-sm-brand text-light text-decoration-none">
+                            Email: qnfood.shop@gmail.com
+                        </a>
+                    </li>                   
+                </ul>
+            </div>
+            <div class="mb-3">
+                <h5 class="lh-lg fw-bold text-white">HÃY THEO DÕI CHÚNG TÔI</h5>
+                <div class="text-start my-3"> 
+                    <a class="text-500" href="https://github.com/tempo1406" target="_blank">
+                        <i class="ph-bold ph-github-logo fs-3 me-2"></i>
+                    </a>
+                    <a class="text-500" href="https://www.facebook.com/nguyenngoctoan1406/" target="_blank">
+                        <i class="ph-bold ph-facebook-logo fs-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr class="border border-800" />
+        <div class="row flex-center pb-3">
+            <div class="col-md-6 order-0">
+                <p class="text-200 text-center">All Rights Reserved &copy; QNFood, 2024</p>
+            </div>
+        </div>
+    </div><!-- end of .container-->
+</section>

@@ -1,0 +1,40 @@
+
+.table-image-cell img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.error, .lblError {
+    color: red;
+    padding-top: 0.5em;
+    margin: 0;
+}
+
+.btn-categories {
+    display: contents;
+}
+
+.search-results .addToCartBtn,
+.search-results button[disabled] {
+    display: none;
+}
+
+/* DataTables custom styling */
+td.highlight {
+    background-color: whitesmoke !important;
+}
+
+.dataTables_scrollHead {
+    user-select: none;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 100%;
+    width: 99%; /* 100% breaks the chart responsiveness*/
+}
+
+
+

@@ -1,0 +1,39 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<!-- LOGIN -->
+<div class="modal" tabindex="-1" id="forget-modal">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="d-flex col">
+          <div class="flex-grow-1"></div>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>                
+        </div>
+        <form class="form mx-2 p-2 mx-md-4 p-md-4 mb-4" id="forget-form" method="post" action="/forget">
+          <h1 class="text-center mb-4 mb-md-5">Khôi phục Tài khoản</h1>
+          <div class="form-group col">
+            <label class="col-form-label" for="txtEmail">Email Tài khoản</label>
+            <div class="">
+                <input type="text" class="form-control" id="txtEmail" name="txtEmail" placeholder="Nhập email tài khoản" required="">
+              <div class="lblError" id="lblErrorName"></div>
+            </div>
+          </div>
+          <div class="form-group-row pt-3">
+            <p>Chúng tôi sẽ gửi 1 mã xác thực đến email của bạn, 
+              vì vậy hãy đảm bảo bạn đã nhập đúng email của mình nhé.
+            </p>
+          </div>      
+          <div class="form-group d-flex flex-row-reverse justify-content-between align-items-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="btnSubmit" name="btnSubmit" value="Submit">Tiếp tục</button>
+            <a href=""
+               class="btn btn-outline-light fw-bolder link-primary"
+               data-bs-toggle="modal"
+               data-bs-target="#login-modal">
+              Trở về đăng nhập
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<%@ page pageEncoding="UTF-8" %>
+<!-- TODO add carousel -->
+
+
+<div id="hero-carousel" class="carousel slide carousel-fade">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="1000">
+      <section class="py-5 overflow-hidden bg-primary80" id="home">
+        <div class="container">
+          <div class="row flex-center">
+            <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-4 mt-md-2">
+              <img class="img-fluid" src="assets/img/gallery/hero-header.png" alt="hero-header" />
+            </div>
+            <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
+              <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light"><span class="notranslate">QNFood</span>&nbsp;ngay tại nhà</h1>
+              <a class="btn btn-lg btn-danger" href="#food-list">ĐẶT MÓN NGAY<i class="ph-bold ph-caret-down ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button> -->
+</div>

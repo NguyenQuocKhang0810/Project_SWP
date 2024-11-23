@@ -1,0 +1,220 @@
+<%@page import="java.math.BigDecimal"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="DAOs.CartItemDAO"%>
+<%@page import="DAOs.AccountDAO"%>
+<%@page import="DAOs.OrderDAO"%>
+<%@page import="DAOs.VoucherDAO"%>
+<%@page import="DAOs.FoodDAO"%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="tab-pane fade" id="home">
+    <%
+        FoodDAO foodDAO = new FoodDAO();
+        VoucherDAO voucherDAO = new VoucherDAO();
+        OrderDAO orderDAO = new OrderDAO();
+        AccountDAO accountDAO = new AccountDAO();
+        CartItemDAO cartItemDAO = new CartItemDAO();
+        List<Map<String, Object>> topFoods = cartItemDAO.getTop5MostPurchasedItems();
+        int totalAccount = accountDAO.getTotalCustomers();
+        int totalFood = foodDAO.getTotalFoodCount();
+        int totalVoucher = voucherDAO.getTotalVoucherCount();
+        int totalOrder = orderDAO.getTotalOrderCount();
+        int totalF = foodDAO.CountTotalFoods();
+        int totalV = voucherDAO.CountTotalVoucher();
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0"); // Định dạng số, không có phần thập phân
+    %>
+    <%--Dynamically generates appropriate greeting based on time of day--%> <%
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        int hour
+                = cal.get(java.util.Calendar.HOUR_OF_DAY);
+        String greeting = "";
+        if (hour >= 4
+                && hour < 11) {
+            greeting = "Chào buổi sáng";
+        } else if (hour >= 11 && hour
+                < 14) {
+            greeting = "Chào buổi trưa";
+        } else if (hour >= 14 && hour < 18) {
+            greeting = "Chào buổi chiều";
+        } else {
+            greeting = "Chào buổi tối";
+        }%>
+
+    <p class="fw-bolder fs-3 mb-4"><%= greeting%>, ${adminName}!</p>
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Tổng số món ăn còn lại</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalFood%> / <%=totalF%></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-hamburger fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Tổng số voucher còn lại</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalVoucher%> / <%=totalV%></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Tổng đơn món hiện tại
+                            </div>
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=totalOrder%></div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-utensils fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Số người dùng hiện tại</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalAccount%></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="far fa-user-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">QN Food</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div id="hero-carousel" class="carousel slide carousel-fade">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="1000">
+                                <section class="py-2 overflow-hidden bg-primary80" id="home">
+                                    <div class="container">
+                                        <div class="row flex-center">
+                                            <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-4 mt-md-2">
+                                                <img class="img-fluid" src="assets/img/gallery/hero-header.png" alt="hero-header" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Top 5 món ăn bán chạy</h6>
+                    <div class="dropdown no-arrow"></div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class='text-center'>
+                                <th>STT</th>
+                                <th>Tên</th>
+                                <th>Số Lượng</th>
+                                <th>Tổng Tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                int index = 1;
+                                for (Map<String, Object> food : topFoods) {
+                            %>
+                            <tr class='text-center'>
+                                <td><%= index++%></td> 
+                                <td><%= food.get("food_name")%></td>
+                                <td><%= food.get("total_quantity")%></td>
+                                <td><%= decimalFormat.format((BigDecimal) food.get("total_price"))%></td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>         
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Đơn Hàng Đã Giao</h6>
+                    <div class="dropdown no-arrow"></div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class='text-center'>
+                                <th>STT</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Thời Gian Đặt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<String> deliveredOrders = orderDAO.getOrdersWithStatusId4();
+                                int index1 = 1;
+                                for (String orderDetail : deliveredOrders) {
+                            %>
+                            <tr class='text-center'>
+                                <td><%= index1++%></td> 
+                                <td><%= orderDetail.split(",")[0].replace("Phone: ", "")%></td> 
+                                <td><%= orderDetail.split(",")[1].replace("Order Time: ", "")%></td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>           
+</div>

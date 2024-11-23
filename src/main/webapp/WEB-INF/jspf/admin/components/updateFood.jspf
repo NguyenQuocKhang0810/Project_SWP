@@ -1,0 +1,169 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="modal" tabindex="-1" id="update-food-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="update-food-form" action="/admin" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cập nhật Món</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-5">
+                    <!-- Food ID (Hidden) -->
+                    <input type="hidden" id="txtFoodID" name="txtFoodID">
+
+                    <!-- Food Type -->
+                    <div class="mb-3">
+                        <label for="txtFoodTypeID" class="form-label">Loại món</label>
+                        <select class="form-select" id="txtFoodTypeID" name="txtFoodTypeID" required>
+                            <option value="1" selected>Mì và Bún</option>
+                            <option value="2">Bánh và Bánh Mì</option>
+                            <option value="3">Hải Sản</option>
+                            <option value="4">Món Ăn Truyền Thống</option>
+                            <option value="5">Món Ăn Châu Á</option>
+                            <option value="6">Món Thịt</option>
+                            <option value="7">Món ăn nhanh</option>
+                            <option value="8">Món ăn nhẹ</option>
+                            <option value="9">Món Tráng Miệng</option>
+                            <option value="10">Đồ uống</option>
+                        </select>
+                    </div>
+
+                    <!-- Food Name -->
+                    <div class="mb-3">
+                        <label for="txtFoodName" class="form-label">Tên món</label>
+                        <input type="text" class="form-control" id="txtFoodName" name="txtFoodName" maxlength="50" required>
+                    </div>
+
+                    <!-- Food Description -->
+                    <div class="mb-3">
+                        <label for="txtFoodDescription" class="form-label">Mô tả</label>
+                        <textarea class="form-control" id="txtFoodDescription" name="txtFoodDescription" maxlength="500" style="min-height: 100px; max-height: 400px;"></textarea>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-3">
+                        <label for="txtFoodPrice" class="form-label">Đơn giá</label>
+                        <input type="number" step="1" class="form-control" id="txtFoodPrice" name="txtFoodPrice" min="0" required>
+                    </div>
+
+                    <!-- Discount Percentage -->
+                    <div class="mb-3">
+                        <label for="txtDiscountPercent" class="form-label">Giảm giá (%)</label>
+                        <input type="number" class="form-control" id="txtDiscountPercent" name="txtDiscountPercent" min="0" max="100" required>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="mb-3">
+                        <label for="txtFoodQuantity" class="form-label">Số lượng</label>
+                        <input type="number" step="1" class="form-control" id="txtFoodQuantity" name="txtFoodQuantity" min="0" required>
+                    </div>
+
+                    <!-- Food Status -->
+                    <div class="mb-3">
+                        <label for="txtFoodStatus" class="form-label">Trạng thái</label>
+                        <select class="form-select" id="txtFoodStatus" name="txtFoodStatus" required>
+                            <option value="1" selected>Còn</option>
+                            <option value="0">Hết</option>
+                        </select>
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <label for="txtFoodRate" class="form-label">Đánh giá</label>
+                        <select class="form-select" id="txtFoodRate" name="txtFoodRate" required>
+                            <option value="0">0 Sao</option>
+                            <option value="1">1 Sao</option>
+                            <option value="2">2 Sao</option>
+                            <option value="3">3 Sao</option>
+                            <option value="4">4 Sao</option>
+                            <option value="5" selected>5 Sao</option>
+                        </select>
+                    </div>
+
+                    <!-- Image Upload or URL Option -->
+                    <div class="mb-3">
+                        <label class="form-label">Chọn phương thức cập nhật hình ảnh</label>
+                        <select class="form-select" id="imageOption" name="imageOption" onchange="toggleImageInput()" required>
+                            <option value="upload">Tải lên hình ảnh</option>
+                            <option value="url">Nhập URL hình ảnh</option>
+                        </select>
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="mb-3" id="uploadSection">
+                        <label for="fileUpload" class="form-label">Upload image</label>
+                        <input type="file" class="form-control" id="fileUpload" name="fileUpload" accept="image/*" onchange="previewImage(event)">
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="mb-3" id="urlSection" style="display: none;">
+                        <label for="txtImageURL" class="form-label">Đường dẫn hình ảnh</label>
+                        <input type="url" class="form-control" id="txtImageURL" name="txtImageURL" maxlength="255" placeholder="https://drive.google.com/file/d/<mã hình>/view?usp=drive_link" onchange="previewImageFromURL()">
+                    </div>
+
+                    <!-- Image Preview -->
+                    <div class="mb-3">
+                        <label class="form-label">Xem trước hình ảnh</label>
+                        <img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 100%; height: auto;">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-success">Cập nhật</button>
+                        <input type="hidden" id="btnSubmit" name="btnSubmit" value="SubmitUpdateFood">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleImageInput() {
+        const option = document.getElementById('imageOption').value;
+        const uploadSection = document.getElementById('uploadSection');
+        const urlSection = document.getElementById('urlSection');
+        const preview = document.getElementById('imagePreview');
+
+        if (option === 'upload') {
+            uploadSection.style.display = 'block';
+            urlSection.style.display = 'none';
+            preview.src = '#'; // Reset preview for URL
+            preview.style.display = 'none';
+        } else if (option === 'url') {
+            uploadSection.style.display = 'none';
+            urlSection.style.display = 'block';
+            preview.style.display = 'none';
+        }
+    }
+
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('imagePreview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+
+    function previewImageFromURL() {
+        const url = document.getElementById('txtImageURL').value;
+        const preview = document.getElementById('imagePreview');
+
+        if (url) {
+            preview.src = url;
+            preview.style.display = 'block';
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+</script>
